@@ -2,7 +2,7 @@ require 'logger'
 require 'frenzy_bunnies/web'
 
 class FrenzyBunnies::Context
-  attr_reader :queue_factory, :logger, :env, :opts
+  attr_reader :queue_factory, :logger, :opts
 
   def initialize(opts={})
     @opts = opts
@@ -11,9 +11,7 @@ class FrenzyBunnies::Context
     @opts[:web_host] ||= 'localhost'
     @opts[:web_port] ||= 11333
     @opts[:web_threadfilter] ||= /^pool-.*/
-    @opts[:env] ||= 'development'
 
-    @env = @opts[:env]
     @logger = @opts[:logger] || Logger.new(STDOUT)
     params = {:host => @opts[:host], :heartbeat_interval => @opts[:heartbeat]}
     (params[:username], params[:password] = @opts[:username], @opts[:password]) if @opts[:username] && @opts[:password]
